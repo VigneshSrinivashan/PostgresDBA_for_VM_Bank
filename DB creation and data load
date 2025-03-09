@@ -1,0 +1,324 @@
+Last login: Fri Mar  7 21:14:07 on console
+vigneshsrinivasan@192 ~ % ssh -i ~/Downloads/m.pem ec2-user@ec2-3-27-76-184.ap-southeast-2.compute.amazonaws.com
+The authenticity of host 'ec2-3-27-76-184.ap-southeast-2.compute.amazonaws.com (3.27.76.184)' can't be established.
+ED25519 key fingerprint is SHA256:zpsQufeVboyx14/wiM3/H6Tzy0+o5jKfLRo6mkluLCs.
+This host key is known by the following other names/addresses:
+    ~/.ssh/known_hosts:29: ec2-3-26-217-30.ap-southeast-2.compute.amazonaws.com
+    ~/.ssh/known_hosts:32: ec2-13-211-69-4.ap-southeast-2.compute.amazonaws.com
+    ~/.ssh/known_hosts:33: ec2-3-26-23-245.ap-southeast-2.compute.amazonaws.com
+    ~/.ssh/known_hosts:34: ec2-3-27-95-38.ap-southeast-2.compute.amazonaws.com
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-3-27-76-184.ap-southeast-2.compute.amazonaws.com' (ED25519) to the list of known hosts.
+Register this system with Red Hat Insights: rhc connect
+
+Example:
+# rhc connect --activation-key <key> --organization <org>
+
+The rhc client and Red Hat Insights will enable analytics and additional
+management capabilities on your system.
+View your connected systems at https://console.redhat.com/insights
+
+You can learn more about how to register your system 
+using rhc at https://red.ht/registration
+Last login: Fri Feb 28 09:19:32 2025 from 223.185.25.250
+[ec2-user@ip-172-31-24-147 ~]$ su -
+Password: 
+[ec2-user@ip-172-31-24-147 ~]$ sudo su -
+Last login: Fri Feb 28 09:19:35 UTC 2025 on pts/1
+[root@ip-172-31-24-147 ~]# su - postgres
+Last login: Fri Feb 28 09:19:39 UTC 2025 on pts/1
+[postgres@ip-172-31-24-147 ~]$ logout
+[root@ip-172-31-24-147 ~]# ps -elf |grep postgres
+0 S root        1575    1509  0  80   0 -  1602 pipe_r 07:33 pts/0    00:00:00 grep --color=auto postgres
+[root@ip-172-31-24-147 ~]# systemctl status postgresql-16
+○ postgresql-16.service - PostgreSQL 16 database server
+     Loaded: loaded (/usr/lib/systemd/system/postgresql-16.service; disabled; preset: disabled)
+     Active: inactive (dead)
+       Docs: https://www.postgresql.org/docs/16/static/
+[root@ip-172-31-24-147 ~]# systemctl start postgresql-16
+[root@ip-172-31-24-147 ~]# systemctl status postgresql-16
+● postgresql-16.service - PostgreSQL 16 database server
+     Loaded: loaded (/usr/lib/systemd/system/postgresql-16.service; disabled; preset: disabled)
+     Active: active (running) since Sun 2025-03-09 07:33:39 UTC; 4s ago
+       Docs: https://www.postgresql.org/docs/16/static/
+    Process: 1583 ExecStartPre=/usr/pgsql-16/bin/postgresql-16-check-db-dir ${PGDATA} (code=exited, status=0/SUCCESS)
+   Main PID: 1588 (postgres)
+      Tasks: 7 (limit: 4377)
+     Memory: 38.6M
+        CPU: 42ms
+     CGroup: /system.slice/postgresql-16.service
+             ├─1588 /usr/pgsql-16/bin/postgres -D /var/lib/pgsql/16/data/
+             ├─1589 "postgres: logger "
+             ├─1590 "postgres: checkpointer "
+             ├─1591 "postgres: background writer "
+             ├─1593 "postgres: walwriter "
+             ├─1594 "postgres: autovacuum launcher "
+             └─1595 "postgres: logical replication launcher "
+
+Mar 09 07:33:39 ip-172-31-24-147.ap-southeast-2.compute.internal systemd[1]: Starting PostgreSQL 16 database server...
+Mar 09 07:33:39 ip-172-31-24-147.ap-southeast-2.compute.internal postgres[1588]: 2025-03-09 07:33:39.770 UTC [1588] LOG:  redirecting log output to logging collector process
+Mar 09 07:33:39 ip-172-31-24-147.ap-southeast-2.compute.internal postgres[1588]: 2025-03-09 07:33:39.770 UTC [1588] HINT:  Future log output will appear in directory "log".
+Mar 09 07:33:39 ip-172-31-24-147.ap-southeast-2.compute.internal systemd[1]: Started PostgreSQL 16 database server.
+[root@ip-172-31-24-147 ~]# su - postgres
+Last login: Sun Mar  9 07:32:32 UTC 2025 on pts/0
+[postgres@ip-172-31-24-147 ~]$ pwd
+/var/lib/pgsql
+[postgres@ip-172-31-24-147 ~]$ psql
+psql (16.7)
+Type "help" for help.
+
+postgres=# creare database VM_BANK;
+ERROR:  syntax error at or near "creare"
+LINE 1: creare database VM_BANK;
+        ^
+postgres=# create database VM_BANK;
+CREATE DATABASE
+postgres=# \q
+[postgres@ip-172-31-24-147 ~]$ \usr\pgsql-16\bin\psql -p 5432 -U postgres -d VM_BANK
+-bash: usrpgsql-16binpsql: command not found
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/psql  -p 5432 -U postgres -d VM_BANK
+psql: error: connection to server on socket "/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "VM_BANK" does not exist
+[postgres@ip-172-31-24-147 ~]$ psql
+psql (16.7)
+Type "help" for help.
+
+postgres=# \dl
+      Large objects
+ ID | Owner | Description 
+----+-------+-------------
+(0 rows)
+
+postgres=# set search_path public;
+ERROR:  syntax error at or near "public"
+LINE 1: set search_path public;
+                        ^
+postgres=# set search_path to public;
+SET
+postgres=# \dl
+      Large objects
+ ID | Owner | Description 
+----+-------+-------------
+(0 rows)
+
+postgres=# \l
+                                                       List of databases
+   Name    |  Owner   | Encoding | Locale Provider |   Collate   |    Ctype    | ICU Locale | ICU Rules |   Access privileges   
+-----------+----------+----------+-----------------+-------------+-------------+------------+-----------+-----------------------
+ demodb    | postgres | UTF8     | libc            | en_US.UTF-8 | en_US.UTF-8 |            |           | 
+ postgres  | postgres | UTF8     | libc            | en_US.UTF-8 | en_US.UTF-8 |            |           | 
+ template0 | postgres | UTF8     | libc            | en_US.UTF-8 | en_US.UTF-8 |            |           | =c/postgres          +
+           |          |          |                 |             |             |            |           | postgres=CTc/postgres
+ template1 | postgres | UTF8     | libc            | en_US.UTF-8 | en_US.UTF-8 |            |           | =c/postgres          +
+           |          |          |                 |             |             |            |           | postgres=CTc/postgres
+ vm_bank   | postgres | UTF8     | libc            | en_US.UTF-8 | en_US.UTF-8 |            |           | 
+(5 rows)
+
+postgres=# \c VM_BANK
+connection to server on socket "/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "VM_BANK" does not exist
+Previous connection kept
+postgres=# show port;
+ port 
+------
+ 5432
+(1 row)
+
+postgres=# \q
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/psql  -p 5432 -U postgres -d vm_bank
+psql (16.7)
+Type "help" for help.
+
+vm_bank=# CREATE TABLE customers (
+    customer_id SERIAL PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    phone VARCHAR(15) UNIQUE NOT NULL,
+    address TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE
+vm_bank=# INSERT INTO customers (first_name, last_name, email, phone, address) 
+VALUES 
+('John', 'Doe', 'john.doe@email.com', '9876543210', '123 Main St, New York, NY'),
+('Jane', 'Smith', 'jane.smith@email.com', '9123456789', '456 Elm St, Los Angeles, CA'),
+('Robert', 'Brown', 'robert.brown@email.com', '9234567890', '789 Oak St, Chicago, IL'),
+('Emily', 'Davis', 'emily.davis@email.com', '9345678901', '321 Pine St, Houston, TX'),
+('Michael', 'Johnson', 'michael.johnson@email.com', '9456789012', '654 Maple St, San Francisco, CA');
+INSERT 0 5
+vm_bank=# select * from customers;
+ customer_id | first_name | last_name |           email           |   phone    |             address             |         created_at         
+-------------+------------+-----------+---------------------------+------------+---------------------------------+----------------------------
+           1 | John       | Doe       | john.doe@email.com        | 9876543210 | 123 Main St, New York, NY       | 2025-03-09 07:50:29.763121
+           2 | Jane       | Smith     | jane.smith@email.com      | 9123456789 | 456 Elm St, Los Angeles, CA     | 2025-03-09 07:50:29.763121
+           3 | Robert     | Brown     | robert.brown@email.com    | 9234567890 | 789 Oak St, Chicago, IL         | 2025-03-09 07:50:29.763121
+           4 | Emily      | Davis     | emily.davis@email.com     | 9345678901 | 321 Pine St, Houston, TX        | 2025-03-09 07:50:29.763121
+           5 | Michael    | Johnson   | michael.johnson@email.com | 9456789012 | 654 Maple St, San Francisco, CA | 2025-03-09 07:50:29.763121
+(5 rows)
+
+vm_bank=# CREATE TABLE accounts (
+    account_id SERIAL PRIMARY KEY,
+    customer_id INT REFERENCES customers(customer_id) ON DELETE CASCADE,
+    account_type VARCHAR(20) CHECK (account_type IN ('savings', 'checking')),
+    balance NUMERIC(15,2) CHECK (balance >= 0) DEFAULT 0.00,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE
+vm_bank=# INSERT INTO accounts (customer_id, account_type, balance) 
+VALUES 
+(1, 'savings', 5000.00),
+(2, 'checking', 1200.50),
+(3, 'savings', 30000.75),
+(4, 'checking', 250.00),
+(5, 'savings', 15000.00);
+INSERT 0 5
+vm_bank=# select * from accounts;
+ account_id | customer_id | account_type | balance  |         created_at         
+------------+-------------+--------------+----------+----------------------------
+          1 |           1 | savings      |  5000.00 | 2025-03-09 07:53:35.800276
+          2 |           2 | checking     |  1200.50 | 2025-03-09 07:53:35.800276
+          3 |           3 | savings      | 30000.75 | 2025-03-09 07:53:35.800276
+          4 |           4 | checking     |   250.00 | 2025-03-09 07:53:35.800276
+          5 |           5 | savings      | 15000.00 | 2025-03-09 07:53:35.800276
+(5 rows)
+
+vm_bank=# CREATE TABLE transactions (
+    transaction_id SERIAL PRIMARY KEY,
+    account_id INT REFERENCES accounts(account_id) ON DELETE CASCADE,
+    transaction_type VARCHAR(10) CHECK (transaction_type IN ('deposit', 'withdrawal', 'transfer')),
+    amount NUMERIC(15,2) CHECK (amount > 0),
+    transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE
+vm_bank=# CREATE TABLE transactions (
+    transaction_id SERIAL PRIMARY KEY,
+    account_id INT REFERENCES accounts(account_id) ON DELETE CASCADE,
+    transaction_type VARCHAR(10) CHECK (transaction_type IN ('deposit', 'withdrawal', 'transfer')),
+    amount NUMERIC(15,2) CHECK (amount > 0),
+    transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+ERROR:  relation "transactions" already exists
+vm_bank=# INSERT INTO transactions (account_id, transaction_type, amount) 
+VALUES 
+(1, 'deposit', 2000.00),
+(1, 'withdrawal', 500.00),
+(2, 'deposit', 1000.50),
+(3, 'transfer', 5000.00),
+(4, 'deposit', 300.00),
+(5, 'withdrawal', 1000.00),
+(2, 'transfer', 750.00),
+(3, 'withdrawal', 2500.00),
+(4, 'deposit', 1500.00),
+(5, 'deposit', 2000.00);
+INSERT 0 10
+vm_bank=# select * from transactions;
+ transaction_id | account_id | transaction_type | amount  |      transaction_date      
+----------------+------------+------------------+---------+----------------------------
+              1 |          1 | deposit          | 2000.00 | 2025-03-09 07:57:34.823479
+              2 |          1 | withdrawal       |  500.00 | 2025-03-09 07:57:34.823479
+              3 |          2 | deposit          | 1000.50 | 2025-03-09 07:57:34.823479
+              4 |          3 | transfer         | 5000.00 | 2025-03-09 07:57:34.823479
+              5 |          4 | deposit          |  300.00 | 2025-03-09 07:57:34.823479
+              6 |          5 | withdrawal       | 1000.00 | 2025-03-09 07:57:34.823479
+              7 |          2 | transfer         |  750.00 | 2025-03-09 07:57:34.823479
+              8 |          3 | withdrawal       | 2500.00 | 2025-03-09 07:57:34.823479
+              9 |          4 | deposit          | 1500.00 | 2025-03-09 07:57:34.823479
+             10 |          5 | deposit          | 2000.00 | 2025-03-09 07:57:34.823479
+(10 rows)
+
+vm_bank=# create schemea employees;
+ERROR:  syntax error at or near "schemea"
+LINE 1: create schemea employees;
+               ^
+vm_bank=# create schema employees;
+CREATE SCHEMA
+vm_bank=# set search_path employees;
+ERROR:  syntax error at or near "employees"
+LINE 1: set search_path employees;
+                        ^
+vm_bank=# set search_path to employees;
+SET
+vm_bank=# CREATE TABLE employees (
+    employee_id SERIAL PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    role VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    phone VARCHAR(15) UNIQUE NOT NULL,
+    salary NUMERIC(10,2) CHECK (salary > 0),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE
+vm_bank=# INSERT INTO employees (first_name, last_name, role, email, phone, salary) 
+VALUES 
+('Alice', 'Johnson', 'Bank Manager', 'alice.johnson@email.com', '9876543210', 85000.00),
+('Bob', 'Smith', 'Loan Officer', 'bob.smith@email.com', '9123456789', 60000.00),
+('Charlie', 'Brown', 'Teller', 'charlie.brown@email.com', '9234567890', 40000.00),
+('Diana', 'Miller', 'Customer Service Rep', 'diana.miller@email.com', '9345678901', 45000.00),
+('Edward', 'Davis', 'IT Support', 'edward.davis@email.com', '9456789012', 70000.00);
+INSERT 0 5
+vm_bank=# create schema loans;
+CREATE SCHEMA
+vm_bank=# select * from transactions;                                           
+ERROR:  relation "transactions" does not exist
+LINE 1: select * from transactions;
+                      ^
+vm_bank=# set search_path to public;
+SET
+vm_bank=# select * from transactions;
+ transaction_id | account_id | transaction_type | amount  |      transaction_date      
+----------------+------------+------------------+---------+----------------------------
+              1 |          1 | deposit          | 2000.00 | 2025-03-09 07:57:34.823479
+              2 |          1 | withdrawal       |  500.00 | 2025-03-09 07:57:34.823479
+              3 |          2 | deposit          | 1000.50 | 2025-03-09 07:57:34.823479
+              4 |          3 | transfer         | 5000.00 | 2025-03-09 07:57:34.823479
+              5 |          4 | deposit          |  300.00 | 2025-03-09 07:57:34.823479
+              6 |          5 | withdrawal       | 1000.00 | 2025-03-09 07:57:34.823479
+              7 |          2 | transfer         |  750.00 | 2025-03-09 07:57:34.823479
+              8 |          3 | withdrawal       | 2500.00 | 2025-03-09 07:57:34.823479
+              9 |          4 | deposit          | 1500.00 | 2025-03-09 07:57:34.823479
+             10 |          5 | deposit          | 2000.00 | 2025-03-09 07:57:34.823479
+(10 rows)
+
+vm_bank=# set search_path to loans;
+SET
+vm_bank=# CREATE TABLE loans (
+    loan_id SERIAL PRIMARY KEY,
+    customer_id INT REFERENCES customers(customer_id) ON DELETE CASCADE,
+    loan_amount NUMERIC(15,2) CHECK (loan_amount > 0),
+    interest_rate DECIMAL(5,2) CHECK (interest_rate > 0),
+    duration_months INT CHECK (duration_months > 0),
+    status VARCHAR(10) CHECK (status IN ('active', 'closed')),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+ERROR:  relation "customers" does not exist
+vm_bank=# set search_path to public;
+SET
+vm_bank=# CREATE TABLE loans (
+    loan_id SERIAL PRIMARY KEY,
+    customer_id INT REFERENCES customers(customer_id) ON DELETE CASCADE,
+    loan_amount NUMERIC(15,2) CHECK (loan_amount > 0),
+    interest_rate DECIMAL(5,2) CHECK (interest_rate > 0),
+    duration_months INT CHECK (duration_months > 0),
+    status VARCHAR(10) CHECK (status IN ('active', 'closed')),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE
+vm_bank=# INSERT INTO loans (customer_id, loan_amount, interest_rate, duration_months, status) 
+VALUES 
+(1, 50000.00, 5.50, 36, 'active'),
+(2, 200000.00, 6.25, 60, 'active'),
+(3, 75000.00, 4.75, 24, 'closed'),
+(4, 120000.00, 5.00, 48, 'active'),
+(5, 500000.00, 7.00, 72, 'closed');
+INSERT 0 5
+vm_bank=# select * from loans;
+ loan_id | customer_id | loan_amount | interest_rate | duration_months | status |         created_at         
+---------+-------------+-------------+---------------+-----------------+--------+----------------------------
+       1 |           1 |    50000.00 |          5.50 |              36 | active | 2025-03-09 08:07:56.468153
+       2 |           2 |   200000.00 |          6.25 |              60 | active | 2025-03-09 08:07:56.468153
+       3 |           3 |    75000.00 |          4.75 |              24 | closed | 2025-03-09 08:07:56.468153
+       4 |           4 |   120000.00 |          5.00 |              48 | active | 2025-03-09 08:07:56.468153
+       5 |           5 |   500000.00 |          7.00 |              72 | closed | 2025-03-09 08:07:56.468153
+(5 rows)
+
+vm_bank=# 
