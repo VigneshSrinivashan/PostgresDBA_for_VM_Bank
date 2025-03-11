@@ -1,0 +1,72 @@
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/psql  -p 5432 -U postgres -d vm_bank
+psql (16.7)
+Type "help" for help.
+
+vm_bank=# \du
+                             List of roles
+ Role name |                         Attributes                         
+-----------+------------------------------------------------------------
+ alice     | Superuser
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS
+
+vm_bank=# set search_path to employees;
+SET
+vm_bank=# \dt
+            List of relations
+  Schema   |   Name    | Type  |  Owner   
+-----------+-----------+-------+----------
+ employees | employees | table | postgres
+(1 row)
+
+vm_bank=# select * from employees;
+ employee_id | first_name | last_name |         role         |          email          |   phone    |  salary  |         created_at         
+-------------+------------+-----------+----------------------+-------------------------+------------+----------+----------------------------
+           1 | Alice      | Johnson   | Bank Manager         | alice.johnson@email.com | 9876543210 | 85000.00 | 2025-03-09 08:02:04.209963
+           2 | Bob        | Smith     | Loan Officer         | bob.smith@email.com     | 9123456789 | 60000.00 | 2025-03-09 08:02:04.209963
+           3 | Charlie    | Brown     | Teller               | charlie.brown@email.com | 9234567890 | 40000.00 | 2025-03-09 08:02:04.209963
+           4 | Diana      | Miller    | Customer Service Rep | diana.miller@email.com  | 9345678901 | 45000.00 | 2025-03-09 08:02:04.209963
+           5 | Edward     | Davis     | IT Support           | edward.davis@email.com  | 9456789012 | 70000.00 | 2025-03-09 08:02:04.209963
+(5 rows)
+
+vm_bank=# create user Bob;
+CREATE ROLE
+vm_bank=# create user Charlie;
+CREATE ROLE
+vm_bank=# create user Diana;
+CREATE ROLE
+vm_bank=# create user Edward;
+CREATE ROLE
+vm_bank=# create role customers_table_access;
+CREATE ROLE
+vm_bank=# set search_path to public;
+SET
+vm_bank=# grant select on customers to customers_table_access;
+GRANT
+vm_bank=# grant customers_table_access to Bob,Charlie,Diana,Edward;
+GRANT ROLE
+vm_bank=# grant select on accounts to bob;
+GRANT
+vm_bank=# \du
+                                    List of roles
+       Role name        |                         Attributes                         
+------------------------+------------------------------------------------------------
+ alice                  | Superuser
+ bob                    | 
+ charlie                | 
+ customers_table_access | Cannot login
+ diana                  | 
+ edward                 | 
+ postgres               | Superuser, Create role, Create DB, Replication, Bypass RLS
+
+                                       ^
+vm_bank=# SELECT grantee, role_name 
+FROM information_schema.applicable_roles 
+WHERE grantee IN ('bob', 'charlie', 'diana');
+ grantee |       role_name        
+---------+------------------------
+ diana   | customers_table_access
+ charlie | customers_table_access
+ bob     | customers_table_access
+(3 rows)
+
+vm_bank=# 
