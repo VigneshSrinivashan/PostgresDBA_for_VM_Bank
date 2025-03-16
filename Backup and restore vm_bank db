@@ -1,0 +1,1243 @@
+Last login: Sun Mar 16 15:25:48 on ttys000
+vigneshsrinivasan@192 ~ % ssh -i ~/Downloads/m.pem ec2-user@ec2-3-26-9-246.ap-southeast-2.compute.amazonaws.com
+Register this system with Red Hat Insights: rhc connect
+
+Example:
+# rhc connect --activation-key <key> --organization <org>
+
+The rhc client and Red Hat Insights will enable analytics and additional
+management capabilities on your system.
+View your connected systems at https://console.redhat.com/insights
+
+You can learn more about how to register your system 
+using rhc at https://red.ht/registration
+Last login: Sun Mar 16 09:57:03 2025 from 223.185.26.112
+[ec2-user@ip-172-31-24-147 ~]$ sudo su -
+Last login: Sun Mar 16 09:29:18 UTC 2025 on pts/1
+[root@ip-172-31-24-147 ~]# SU - POSTGRES
+-bash: SU: command not found
+[root@ip-172-31-24-147 ~]# su - postgres
+Last login: Sun Mar 16 09:29:26 UTC 2025 on pts/1
+[postgres@ip-172-31-24-147 ~]$ ls -ltr /opt/backup/
+total 0
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/pg_dump -U postgres -p 5432 -v -f /opt/backup/vm_bank_bk.sql vm_bank
+pg_dump: last built-in OID is 16383
+pg_dump: reading extensions
+pg_dump: identifying extension members
+pg_dump: reading schemas
+pg_dump: reading user-defined tables
+pg_dump: reading user-defined functions
+pg_dump: reading user-defined types
+pg_dump: reading procedural languages
+pg_dump: reading user-defined aggregate functions
+pg_dump: reading user-defined operators
+pg_dump: reading user-defined access methods
+pg_dump: reading user-defined operator classes
+pg_dump: reading user-defined operator families
+pg_dump: reading user-defined text search parsers
+pg_dump: reading user-defined text search templates
+pg_dump: reading user-defined text search dictionaries
+pg_dump: reading user-defined text search configurations
+pg_dump: reading user-defined foreign-data wrappers
+pg_dump: reading user-defined foreign servers
+pg_dump: reading default privileges
+pg_dump: reading user-defined collations
+pg_dump: reading user-defined conversions
+pg_dump: reading type casts
+pg_dump: reading transforms
+pg_dump: reading table inheritance information
+pg_dump: reading event triggers
+pg_dump: finding extension tables
+pg_dump: finding inheritance relationships
+pg_dump: reading column info for interesting tables
+pg_dump: finding table default expressions
+pg_dump: finding table check constraints
+pg_dump: flagging inherited columns in subtables
+pg_dump: reading partitioning data
+pg_dump: reading indexes
+pg_dump: flagging indexes in partitioned tables
+pg_dump: reading extended statistics
+pg_dump: reading constraints
+pg_dump: reading triggers
+pg_dump: reading rewrite rules
+pg_dump: reading policies
+pg_dump: reading row-level security policies
+pg_dump: reading publications
+pg_dump: reading publication membership of tables
+pg_dump: reading publication membership of schemas
+pg_dump: reading subscriptions
+pg_dump: reading large objects
+pg_dump: reading dependency data
+pg_dump: saving encoding = UTF8
+pg_dump: saving standard_conforming_strings = on
+pg_dump: saving search_path = 
+pg_dump: creating SCHEMA "employees"
+pg_dump: creating SCHEMA "loans"
+pg_dump: creating TABLE "employees.employees"
+pg_dump: creating SEQUENCE "employees.employees_employee_id_seq"
+pg_dump: creating SEQUENCE OWNED BY "employees.employees_employee_id_seq"
+pg_dump: creating TABLE "public.accounts"
+pg_dump: creating SEQUENCE "public.accounts_account_id_seq"
+pg_dump: creating SEQUENCE OWNED BY "public.accounts_account_id_seq"
+pg_dump: creating TABLE "public.customers"
+pg_dump: creating SEQUENCE "public.customers_customer_id_seq"
+pg_dump: creating SEQUENCE OWNED BY "public.customers_customer_id_seq"
+pg_dump: creating TABLE "public.loans"
+pg_dump: creating SEQUENCE "public.loans_loan_id_seq"
+pg_dump: creating SEQUENCE OWNED BY "public.loans_loan_id_seq"
+pg_dump: creating TABLE "public.transactions"
+pg_dump: creating SEQUENCE "public.transactions_transaction_id_seq"
+pg_dump: creating SEQUENCE OWNED BY "public.transactions_transaction_id_seq"
+pg_dump: creating DEFAULT "employees.employees employee_id"
+pg_dump: creating DEFAULT "public.accounts account_id"
+pg_dump: creating DEFAULT "public.customers customer_id"
+pg_dump: creating DEFAULT "public.loans loan_id"
+pg_dump: creating DEFAULT "public.transactions transaction_id"
+pg_dump: processing data for table "employees.employees"
+pg_dump: dumping contents of table "employees.employees"
+pg_dump: processing data for table "public.accounts"
+pg_dump: dumping contents of table "public.accounts"
+pg_dump: processing data for table "public.customers"
+pg_dump: dumping contents of table "public.customers"
+pg_dump: processing data for table "public.loans"
+pg_dump: dumping contents of table "public.loans"
+pg_dump: processing data for table "public.transactions"
+pg_dump: dumping contents of table "public.transactions"
+pg_dump: executing SEQUENCE SET employees_employee_id_seq
+pg_dump: executing SEQUENCE SET accounts_account_id_seq
+pg_dump: executing SEQUENCE SET customers_customer_id_seq
+pg_dump: executing SEQUENCE SET loans_loan_id_seq
+pg_dump: executing SEQUENCE SET transactions_transaction_id_seq
+pg_dump: creating CONSTRAINT "employees.employees employees_email_key"
+pg_dump: creating CONSTRAINT "employees.employees employees_phone_key"
+pg_dump: creating CONSTRAINT "employees.employees employees_pkey"
+pg_dump: creating CONSTRAINT "public.accounts accounts_pkey"
+pg_dump: creating CONSTRAINT "public.customers customers_email_key"
+pg_dump: creating CONSTRAINT "public.customers customers_phone_key"
+pg_dump: creating CONSTRAINT "public.customers customers_pkey"
+pg_dump: creating CONSTRAINT "public.loans loans_pkey"
+pg_dump: creating CONSTRAINT "public.transactions transactions_pkey"
+pg_dump: creating FK CONSTRAINT "public.accounts accounts_customer_id_fkey"
+pg_dump: creating FK CONSTRAINT "public.loans loans_customer_id_fkey"
+pg_dump: creating FK CONSTRAINT "public.transactions transactions_account_id_fkey"
+pg_dump: creating ACL "public.TABLE accounts"
+pg_dump: creating ACL "public.TABLE customers"
+[postgres@ip-172-31-24-147 ~]$ ls -ltr /opt/backup/
+total 16
+-rw-r--r--. 1 postgres postgres 16239 Mar 16 10:23 vm_bank_bk.sql
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/pg_dump -U postgres -p 5432 -v -Fc -f /opt/backup/vm_bank_bk.dump vm_bank
+pg_dump: last built-in OID is 16383
+pg_dump: reading extensions
+pg_dump: identifying extension members
+pg_dump: reading schemas
+pg_dump: reading user-defined tables
+pg_dump: reading user-defined functions
+pg_dump: reading user-defined types
+pg_dump: reading procedural languages
+pg_dump: reading user-defined aggregate functions
+pg_dump: reading user-defined operators
+pg_dump: reading user-defined access methods
+pg_dump: reading user-defined operator classes
+pg_dump: reading user-defined operator families
+pg_dump: reading user-defined text search parsers
+pg_dump: reading user-defined text search templates
+pg_dump: reading user-defined text search dictionaries
+pg_dump: reading user-defined text search configurations
+pg_dump: reading user-defined foreign-data wrappers
+pg_dump: reading user-defined foreign servers
+pg_dump: reading default privileges
+pg_dump: reading user-defined collations
+pg_dump: reading user-defined conversions
+pg_dump: reading type casts
+pg_dump: reading transforms
+pg_dump: reading table inheritance information
+pg_dump: reading event triggers
+pg_dump: finding extension tables
+pg_dump: finding inheritance relationships
+pg_dump: reading column info for interesting tables
+pg_dump: finding table default expressions
+pg_dump: finding table check constraints
+pg_dump: flagging inherited columns in subtables
+pg_dump: reading partitioning data
+pg_dump: reading indexes
+pg_dump: flagging indexes in partitioned tables
+pg_dump: reading extended statistics
+pg_dump: reading constraints
+pg_dump: reading triggers
+pg_dump: reading rewrite rules
+pg_dump: reading policies
+pg_dump: reading row-level security policies
+pg_dump: reading publications
+pg_dump: reading publication membership of tables
+pg_dump: reading publication membership of schemas
+pg_dump: reading subscriptions
+pg_dump: reading large objects
+pg_dump: reading dependency data
+pg_dump: saving encoding = UTF8
+pg_dump: saving standard_conforming_strings = on
+pg_dump: saving search_path = 
+pg_dump: saving database definition
+pg_dump: dumping contents of table "employees.employees"
+pg_dump: dumping contents of table "public.accounts"
+pg_dump: dumping contents of table "public.customers"
+pg_dump: dumping contents of table "public.loans"
+pg_dump: dumping contents of table "public.transactions"
+[postgres@ip-172-31-24-147 ~]$ ls -ltr /opt/backup/
+total 36
+-rw-r--r--. 1 postgres postgres 16239 Mar 16 10:23 vm_bank_bk.sql
+-rw-r--r--. 1 postgres postgres 17158 Mar 16 10:26 vm_bank_bk.dump
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/pg_dump -U postgres -p 5432 -v -Ft -f /opt/backup/vm_bank_tarbk.gzip vm_bank
+pg_dump: last built-in OID is 16383
+pg_dump: reading extensions
+pg_dump: identifying extension members
+pg_dump: reading schemas
+pg_dump: reading user-defined tables
+pg_dump: reading user-defined functions
+pg_dump: reading user-defined types
+pg_dump: reading procedural languages
+pg_dump: reading user-defined aggregate functions
+pg_dump: reading user-defined operators
+pg_dump: reading user-defined access methods
+pg_dump: reading user-defined operator classes
+pg_dump: reading user-defined operator families
+pg_dump: reading user-defined text search parsers
+pg_dump: reading user-defined text search templates
+pg_dump: reading user-defined text search dictionaries
+pg_dump: reading user-defined text search configurations
+pg_dump: reading user-defined foreign-data wrappers
+pg_dump: reading user-defined foreign servers
+pg_dump: reading default privileges
+pg_dump: reading user-defined collations
+pg_dump: reading user-defined conversions
+pg_dump: reading type casts
+pg_dump: reading transforms
+pg_dump: reading table inheritance information
+pg_dump: reading event triggers
+pg_dump: finding extension tables
+pg_dump: finding inheritance relationships
+pg_dump: reading column info for interesting tables
+pg_dump: finding table default expressions
+pg_dump: finding table check constraints
+pg_dump: flagging inherited columns in subtables
+pg_dump: reading partitioning data
+pg_dump: reading indexes
+pg_dump: flagging indexes in partitioned tables
+pg_dump: reading extended statistics
+pg_dump: reading constraints
+pg_dump: reading triggers
+pg_dump: reading rewrite rules
+pg_dump: reading policies
+pg_dump: reading row-level security policies
+pg_dump: reading publications
+pg_dump: reading publication membership of tables
+pg_dump: reading publication membership of schemas
+pg_dump: reading subscriptions
+pg_dump: reading large objects
+pg_dump: reading dependency data
+pg_dump: saving encoding = UTF8
+pg_dump: saving standard_conforming_strings = on
+pg_dump: saving search_path = 
+pg_dump: saving database definition
+pg_dump: dumping contents of table "employees.employees"
+pg_dump: dumping contents of table "public.accounts"
+pg_dump: dumping contents of table "public.customers"
+pg_dump: dumping contents of table "public.loans"
+pg_dump: dumping contents of table "public.transactions"
+pg_dump: dropping DATABASE vm_bank
+pg_dump: creating DATABASE "vm_bank"
+pg_dump: connecting to new database "vm_bank"
+pg_dump: creating SCHEMA "employees"
+pg_dump: creating SCHEMA "loans"
+pg_dump: creating TABLE "employees.employees"
+pg_dump: creating SEQUENCE "employees.employees_employee_id_seq"
+pg_dump: creating SEQUENCE OWNED BY "employees.employees_employee_id_seq"
+pg_dump: creating TABLE "public.accounts"
+pg_dump: creating SEQUENCE "public.accounts_account_id_seq"
+pg_dump: creating SEQUENCE OWNED BY "public.accounts_account_id_seq"
+pg_dump: creating TABLE "public.customers"
+pg_dump: creating SEQUENCE "public.customers_customer_id_seq"
+pg_dump: creating SEQUENCE OWNED BY "public.customers_customer_id_seq"
+pg_dump: creating TABLE "public.loans"
+pg_dump: creating SEQUENCE "public.loans_loan_id_seq"
+pg_dump: creating SEQUENCE OWNED BY "public.loans_loan_id_seq"
+pg_dump: creating TABLE "public.transactions"
+pg_dump: creating SEQUENCE "public.transactions_transaction_id_seq"
+pg_dump: creating SEQUENCE OWNED BY "public.transactions_transaction_id_seq"
+pg_dump: creating DEFAULT "employees.employees employee_id"
+pg_dump: creating DEFAULT "public.accounts account_id"
+pg_dump: creating DEFAULT "public.customers customer_id"
+pg_dump: creating DEFAULT "public.loans loan_id"
+pg_dump: creating DEFAULT "public.transactions transaction_id"
+pg_dump: processing data for table "employees.employees"
+pg_dump: processing data for table "public.accounts"
+pg_dump: processing data for table "public.customers"
+pg_dump: processing data for table "public.loans"
+pg_dump: processing data for table "public.transactions"
+pg_dump: executing SEQUENCE SET employees_employee_id_seq
+pg_dump: executing SEQUENCE SET accounts_account_id_seq
+pg_dump: executing SEQUENCE SET customers_customer_id_seq
+pg_dump: executing SEQUENCE SET loans_loan_id_seq
+pg_dump: executing SEQUENCE SET transactions_transaction_id_seq
+pg_dump: creating CONSTRAINT "employees.employees employees_email_key"
+pg_dump: creating CONSTRAINT "employees.employees employees_phone_key"
+pg_dump: creating CONSTRAINT "employees.employees employees_pkey"
+pg_dump: creating CONSTRAINT "public.accounts accounts_pkey"
+pg_dump: creating CONSTRAINT "public.customers customers_email_key"
+pg_dump: creating CONSTRAINT "public.customers customers_phone_key"
+pg_dump: creating CONSTRAINT "public.customers customers_pkey"
+pg_dump: creating CONSTRAINT "public.loans loans_pkey"
+pg_dump: creating CONSTRAINT "public.transactions transactions_pkey"
+pg_dump: creating FK CONSTRAINT "public.accounts accounts_customer_id_fkey"
+pg_dump: creating FK CONSTRAINT "public.loans loans_customer_id_fkey"
+pg_dump: creating FK CONSTRAINT "public.transactions transactions_account_id_fkey"
+pg_dump: creating ACL "public.TABLE accounts"
+pg_dump: creating ACL "public.TABLE customers"
+[postgres@ip-172-31-24-147 ~]$ ls -ltr /opt/backup/
+total 76
+-rw-r--r--. 1 postgres postgres 16239 Mar 16 10:23 vm_bank_bk.sql
+-rw-r--r--. 1 postgres postgres 17158 Mar 16 10:26 vm_bank_bk.dump
+-rw-r--r--. 1 postgres postgres 37376 Mar 16 10:27 vm_bank_tarbk.gzip
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/pg_dump -U postgres -p 5432 -v -Fd -f /opt/backup/vm_bank_bk vm_bank
+pg_dump: last built-in OID is 16383
+pg_dump: reading extensions
+pg_dump: identifying extension members
+pg_dump: reading schemas
+pg_dump: reading user-defined tables
+pg_dump: reading user-defined functions
+pg_dump: reading user-defined types
+pg_dump: reading procedural languages
+pg_dump: reading user-defined aggregate functions
+pg_dump: reading user-defined operators
+pg_dump: reading user-defined access methods
+pg_dump: reading user-defined operator classes
+pg_dump: reading user-defined operator families
+pg_dump: reading user-defined text search parsers
+pg_dump: reading user-defined text search templates
+pg_dump: reading user-defined text search dictionaries
+pg_dump: reading user-defined text search configurations
+pg_dump: reading user-defined foreign-data wrappers
+pg_dump: reading user-defined foreign servers
+pg_dump: reading default privileges
+pg_dump: reading user-defined collations
+pg_dump: reading user-defined conversions
+pg_dump: reading type casts
+pg_dump: reading transforms
+pg_dump: reading table inheritance information
+pg_dump: reading event triggers
+pg_dump: finding extension tables
+pg_dump: finding inheritance relationships
+pg_dump: reading column info for interesting tables
+pg_dump: finding table default expressions
+pg_dump: finding table check constraints
+pg_dump: flagging inherited columns in subtables
+pg_dump: reading partitioning data
+pg_dump: reading indexes
+pg_dump: flagging indexes in partitioned tables
+pg_dump: reading extended statistics
+pg_dump: reading constraints
+pg_dump: reading triggers
+pg_dump: reading rewrite rules
+pg_dump: reading policies
+pg_dump: reading row-level security policies
+pg_dump: reading publications
+pg_dump: reading publication membership of tables
+pg_dump: reading publication membership of schemas
+pg_dump: reading subscriptions
+pg_dump: reading large objects
+pg_dump: reading dependency data
+pg_dump: saving encoding = UTF8
+pg_dump: saving standard_conforming_strings = on
+pg_dump: saving search_path = 
+pg_dump: saving database definition
+pg_dump: dumping contents of table "employees.employees"
+pg_dump: dumping contents of table "public.accounts"
+pg_dump: dumping contents of table "public.customers"
+pg_dump: dumping contents of table "public.loans"
+pg_dump: dumping contents of table "public.transactions"
+[postgres@ip-172-31-24-147 ~]$ ls -ltr /opt/backup/
+total 76
+-rw-r--r--. 1 postgres postgres 16239 Mar 16 10:23 vm_bank_bk.sql
+-rw-r--r--. 1 postgres postgres 17158 Mar 16 10:26 vm_bank_bk.dump
+-rw-r--r--. 1 postgres postgres 37376 Mar 16 10:27 vm_bank_tarbk.gzip
+drwx------. 2 postgres postgres   116 Mar 16 10:27 vm_bank_bk
+[postgres@ip-172-31-24-147 ~]$ cat vm_bank_bk.sql
+cat: vm_bank_bk.sql: No such file or directory
+[postgres@ip-172-31-24-147 ~]$ cat /opt/backup/vm_bank_bk.sql
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 16.7
+-- Dumped by pg_dump version 16.7
+
+-- Started on 2025-03-16 10:23:46 UTC
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 6 (class 2615 OID 16436)
+-- Name: employees; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA employees;
+
+
+ALTER SCHEMA employees OWNER TO postgres;
+
+--
+-- TOC entry 7 (class 2615 OID 16450)
+-- Name: loans; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA loans;
+
+
+ALTER SCHEMA loans OWNER TO postgres;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 224 (class 1259 OID 16438)
+-- Name: employees; Type: TABLE; Schema: employees; Owner: postgres
+--
+
+CREATE TABLE employees.employees (
+    employee_id integer NOT NULL,
+    first_name character varying(50) NOT NULL,
+    last_name character varying(50) NOT NULL,
+    role character varying(50) NOT NULL,
+    email character varying(100) NOT NULL,
+    phone character varying(15) NOT NULL,
+    salary numeric(10,2),
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT employees_salary_check CHECK ((salary > (0)::numeric))
+);
+
+
+ALTER TABLE employees.employees OWNER TO postgres;
+
+--
+-- TOC entry 223 (class 1259 OID 16437)
+-- Name: employees_employee_id_seq; Type: SEQUENCE; Schema: employees; Owner: postgres
+--
+
+CREATE SEQUENCE employees.employees_employee_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE employees.employees_employee_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3450 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: employees_employee_id_seq; Type: SEQUENCE OWNED BY; Schema: employees; Owner: postgres
+--
+
+ALTER SEQUENCE employees.employees_employee_id_seq OWNED BY employees.employees.employee_id;
+
+
+--
+-- TOC entry 220 (class 1259 OID 16405)
+-- Name: accounts; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.accounts (
+    account_id integer NOT NULL,
+    customer_id integer,
+    account_type character varying(20),
+    balance numeric(15,2) DEFAULT 0.00,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT accounts_account_type_check CHECK (((account_type)::text = ANY ((ARRAY['savings'::character varying, 'checking'::character varying])::text[]))),
+    CONSTRAINT accounts_balance_check CHECK ((balance >= (0)::numeric))
+);
+
+
+ALTER TABLE public.accounts OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1259 OID 16404)
+-- Name: accounts_account_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.accounts_account_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.accounts_account_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3452 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: accounts_account_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.accounts_account_id_seq OWNED BY public.accounts.account_id;
+
+
+--
+-- TOC entry 218 (class 1259 OID 16391)
+-- Name: customers; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.customers (
+    customer_id integer NOT NULL,
+    first_name character varying(50) NOT NULL,
+    last_name character varying(50) NOT NULL,
+    email character varying(100) NOT NULL,
+    phone character varying(15) NOT NULL,
+    address text,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE public.customers OWNER TO postgres;
+
+--
+-- TOC entry 217 (class 1259 OID 16390)
+-- Name: customers_customer_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.customers_customer_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.customers_customer_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3454 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: customers_customer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.customers_customer_id_seq OWNED BY public.customers.customer_id;
+
+
+--
+-- TOC entry 226 (class 1259 OID 16464)
+-- Name: loans; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.loans (
+    loan_id integer NOT NULL,
+    customer_id integer,
+    loan_amount numeric(15,2),
+    interest_rate numeric(5,2),
+    duration_months integer,
+    status character varying(10),
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT loans_duration_months_check CHECK ((duration_months > 0)),
+    CONSTRAINT loans_interest_rate_check CHECK ((interest_rate > (0)::numeric)),
+    CONSTRAINT loans_loan_amount_check CHECK ((loan_amount > (0)::numeric)),
+    CONSTRAINT loans_status_check CHECK (((status)::text = ANY ((ARRAY['active'::character varying, 'closed'::character varying])::text[])))
+);
+
+
+ALTER TABLE public.loans OWNER TO postgres;
+
+--
+-- TOC entry 225 (class 1259 OID 16463)
+-- Name: loans_loan_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.loans_loan_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.loans_loan_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3455 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: loans_loan_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.loans_loan_id_seq OWNED BY public.loans.loan_id;
+
+
+--
+-- TOC entry 222 (class 1259 OID 16421)
+-- Name: transactions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.transactions (
+    transaction_id integer NOT NULL,
+    account_id integer,
+    transaction_type character varying(10),
+    amount numeric(15,2),
+    transaction_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT transactions_amount_check CHECK ((amount > (0)::numeric)),
+    CONSTRAINT transactions_transaction_type_check CHECK (((transaction_type)::text = ANY ((ARRAY['deposit'::character varying, 'withdrawal'::character varying, 'transfer'::character varying])::text[])))
+);
+
+
+ALTER TABLE public.transactions OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 16420)
+-- Name: transactions_transaction_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.transactions_transaction_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.transactions_transaction_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3456 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: transactions_transaction_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.transactions_transaction_id_seq OWNED BY public.transactions.transaction_id;
+
+
+--
+-- TOC entry 3258 (class 2604 OID 16441)
+-- Name: employees employee_id; Type: DEFAULT; Schema: employees; Owner: postgres
+--
+
+ALTER TABLE ONLY employees.employees ALTER COLUMN employee_id SET DEFAULT nextval('employees.employees_employee_id_seq'::regclass);
+
+
+--
+-- TOC entry 3253 (class 2604 OID 16408)
+-- Name: accounts account_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts ALTER COLUMN account_id SET DEFAULT nextval('public.accounts_account_id_seq'::regclass);
+
+
+--
+-- TOC entry 3251 (class 2604 OID 16394)
+-- Name: customers customer_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.customers ALTER COLUMN customer_id SET DEFAULT nextval('public.customers_customer_id_seq'::regclass);
+
+
+--
+-- TOC entry 3260 (class 2604 OID 16467)
+-- Name: loans loan_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.loans ALTER COLUMN loan_id SET DEFAULT nextval('public.loans_loan_id_seq'::regclass);
+
+
+--
+-- TOC entry 3256 (class 2604 OID 16424)
+-- Name: transactions transaction_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.transactions ALTER COLUMN transaction_id SET DEFAULT nextval('public.transactions_transaction_id_seq'::regclass);
+
+
+--
+-- TOC entry 3442 (class 0 OID 16438)
+-- Dependencies: 224
+-- Data for Name: employees; Type: TABLE DATA; Schema: employees; Owner: postgres
+--
+
+COPY employees.employees (employee_id, first_name, last_name, role, email, phone, salary, created_at) FROM stdin;
+1	Alice	Johnson	Bank Manager	alice.johnson@email.com	9876543210	85000.00	2025-03-09 08:02:04.209963
+2	Bob	Smith	Loan Officer	bob.smith@email.com	9123456789	60000.00	2025-03-09 08:02:04.209963
+3	Charlie	Brown	Teller	charlie.brown@email.com	9234567890	40000.00	2025-03-09 08:02:04.209963
+4	Diana	Miller	Customer Service Rep	diana.miller@email.com	9345678901	45000.00	2025-03-09 08:02:04.209963
+5	Edward	Davis	IT Support	edward.davis@email.com	9456789012	70000.00	2025-03-09 08:02:04.209963
+\.
+
+
+--
+-- TOC entry 3438 (class 0 OID 16405)
+-- Dependencies: 220
+-- Data for Name: accounts; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.accounts (account_id, customer_id, account_type, balance, created_at) FROM stdin;
+1	1	savings	5000.00	2025-03-09 07:53:35.800276
+2	2	checking	1200.50	2025-03-09 07:53:35.800276
+3	3	savings	30000.75	2025-03-09 07:53:35.800276
+4	4	checking	250.00	2025-03-09 07:53:35.800276
+5	5	savings	15000.00	2025-03-09 07:53:35.800276
+\.
+
+
+--
+-- TOC entry 3436 (class 0 OID 16391)
+-- Dependencies: 218
+-- Data for Name: customers; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.customers (customer_id, first_name, last_name, email, phone, address, created_at) FROM stdin;
+1	John	Doe	john.doe@email.com	9876543210	123 Main St, New York, NY	2025-03-09 07:50:29.763121
+2	Jane	Smith	jane.smith@email.com	9123456789	456 Elm St, Los Angeles, CA	2025-03-09 07:50:29.763121
+3	Robert	Brown	robert.brown@email.com	9234567890	789 Oak St, Chicago, IL	2025-03-09 07:50:29.763121
+4	Emily	Davis	emily.davis@email.com	9345678901	321 Pine St, Houston, TX	2025-03-09 07:50:29.763121
+5	Michael	Johnson	michael.johnson@email.com	9456789012	654 Maple St, San Francisco, CA	2025-03-09 07:50:29.763121
+\.
+
+
+--
+-- TOC entry 3444 (class 0 OID 16464)
+-- Dependencies: 226
+-- Data for Name: loans; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.loans (loan_id, customer_id, loan_amount, interest_rate, duration_months, status, created_at) FROM stdin;
+1	1	50000.00	5.50	36	active	2025-03-09 08:07:56.468153
+2	2	200000.00	6.25	60	active	2025-03-09 08:07:56.468153
+3	3	75000.00	4.75	24	closed	2025-03-09 08:07:56.468153
+4	4	120000.00	5.00	48	active	2025-03-09 08:07:56.468153
+5	5	500000.00	7.00	72	closed	2025-03-09 08:07:56.468153
+\.
+
+
+--
+-- TOC entry 3440 (class 0 OID 16421)
+-- Dependencies: 222
+-- Data for Name: transactions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.transactions (transaction_id, account_id, transaction_type, amount, transaction_date) FROM stdin;
+1	1	deposit	2000.00	2025-03-09 07:57:34.823479
+2	1	withdrawal	500.00	2025-03-09 07:57:34.823479
+3	2	deposit	1000.50	2025-03-09 07:57:34.823479
+4	3	transfer	5000.00	2025-03-09 07:57:34.823479
+5	4	deposit	300.00	2025-03-09 07:57:34.823479
+6	5	withdrawal	1000.00	2025-03-09 07:57:34.823479
+7	2	transfer	750.00	2025-03-09 07:57:34.823479
+8	3	withdrawal	2500.00	2025-03-09 07:57:34.823479
+9	4	deposit	1500.00	2025-03-09 07:57:34.823479
+10	5	deposit	2000.00	2025-03-09 07:57:34.823479
+\.
+
+
+--
+-- TOC entry 3457 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: employees_employee_id_seq; Type: SEQUENCE SET; Schema: employees; Owner: postgres
+--
+
+SELECT pg_catalog.setval('employees.employees_employee_id_seq', 5, true);
+
+
+--
+-- TOC entry 3458 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: accounts_account_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.accounts_account_id_seq', 5, true);
+
+
+--
+-- TOC entry 3459 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: customers_customer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.customers_customer_id_seq', 5, true);
+
+
+--
+-- TOC entry 3460 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: loans_loan_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.loans_loan_id_seq', 5, true);
+
+
+--
+-- TOC entry 3461 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: transactions_transaction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.transactions_transaction_id_seq', 10, true);
+
+
+--
+-- TOC entry 3282 (class 2606 OID 16447)
+-- Name: employees employees_email_key; Type: CONSTRAINT; Schema: employees; Owner: postgres
+--
+
+ALTER TABLE ONLY employees.employees
+    ADD CONSTRAINT employees_email_key UNIQUE (email);
+
+
+--
+-- TOC entry 3284 (class 2606 OID 16449)
+-- Name: employees employees_phone_key; Type: CONSTRAINT; Schema: employees; Owner: postgres
+--
+
+ALTER TABLE ONLY employees.employees
+    ADD CONSTRAINT employees_phone_key UNIQUE (phone);
+
+
+--
+-- TOC entry 3286 (class 2606 OID 16445)
+-- Name: employees employees_pkey; Type: CONSTRAINT; Schema: employees; Owner: postgres
+--
+
+ALTER TABLE ONLY employees.employees
+    ADD CONSTRAINT employees_pkey PRIMARY KEY (employee_id);
+
+
+--
+-- TOC entry 3278 (class 2606 OID 16414)
+-- Name: accounts accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts
+    ADD CONSTRAINT accounts_pkey PRIMARY KEY (account_id);
+
+
+--
+-- TOC entry 3272 (class 2606 OID 16401)
+-- Name: customers customers_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.customers
+    ADD CONSTRAINT customers_email_key UNIQUE (email);
+
+
+--
+-- TOC entry 3274 (class 2606 OID 16403)
+-- Name: customers customers_phone_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.customers
+    ADD CONSTRAINT customers_phone_key UNIQUE (phone);
+
+
+--
+-- TOC entry 3276 (class 2606 OID 16399)
+-- Name: customers customers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.customers
+    ADD CONSTRAINT customers_pkey PRIMARY KEY (customer_id);
+
+
+--
+-- TOC entry 3288 (class 2606 OID 16474)
+-- Name: loans loans_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.loans
+    ADD CONSTRAINT loans_pkey PRIMARY KEY (loan_id);
+
+
+--
+-- TOC entry 3280 (class 2606 OID 16429)
+-- Name: transactions transactions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.transactions
+    ADD CONSTRAINT transactions_pkey PRIMARY KEY (transaction_id);
+
+
+--
+-- TOC entry 3289 (class 2606 OID 16415)
+-- Name: accounts accounts_customer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts
+    ADD CONSTRAINT accounts_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.customers(customer_id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3291 (class 2606 OID 16475)
+-- Name: loans loans_customer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.loans
+    ADD CONSTRAINT loans_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.customers(customer_id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3290 (class 2606 OID 16430)
+-- Name: transactions transactions_account_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.transactions
+    ADD CONSTRAINT transactions_account_id_fkey FOREIGN KEY (account_id) REFERENCES public.accounts(account_id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3451 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: TABLE accounts; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT SELECT ON TABLE public.accounts TO bob;
+
+
+--
+-- TOC entry 3453 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: TABLE customers; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT SELECT ON TABLE public.customers TO customers_table_access;
+
+
+-- Completed on 2025-03-16 10:23:46 UTC
+
+--
+-- PostgreSQL database dump complete
+--
+
+[postgres@ip-172-31-24-147 ~]$ psql
+psql (16.7)
+Type "help" for help.
+
+postgres=# CREATE DATABASE vm_bank_backup_db;
+CREATE DATABASE
+postgres=# \q
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/psql -U postgres -p 5432 -d vm_bank_backup_db
+psql (16.7)
+Type "help" for help.
+
+vm_bank_backup_db=# \l
+                                                           List of databases
+       Name        |  Owner   | Encoding | Locale Provider |   Collate   |    Ctype    | ICU Locale | ICU Rules |   Access privileges   
+-------------------+----------+----------+-----------------+-------------+-------------+------------+-----------+-----------------------
+ demodb            | postgres | UTF8     | libc            | en_US.UTF-8 | en_US.UTF-8 |            |           | 
+ postgres          | postgres | UTF8     | libc            | en_US.UTF-8 | en_US.UTF-8 |            |           | 
+ template0         | postgres | UTF8     | libc            | en_US.UTF-8 | en_US.UTF-8 |            |           | =c/postgres          +
+                   |          |          |                 |             |             |            |           | postgres=CTc/postgres
+ template1         | postgres | UTF8     | libc            | en_US.UTF-8 | en_US.UTF-8 |            |           | =c/postgres          +
+                   |          |          |                 |             |             |            |           | postgres=CTc/postgres
+ vm_bank           | postgres | UTF8     | libc            | en_US.UTF-8 | en_US.UTF-8 |            |           | 
+ vm_bank_backup_db | postgres | UTF8     | libc            | en_US.UTF-8 | en_US.UTF-8 |            |           | 
+(6 rows)
+
+vm_bank_backup_db=# \dt
+Did not find any relations.
+vm_bank_backup_db=# \dn
+      List of schemas
+  Name  |       Owner       
+--------+-------------------
+ public | pg_database_owner
+(1 row)
+
+vm_bank_backup_db=# \ds
+Did not find any relations.
+vm_bank_backup_db=# \q
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/pg_restore -U postgres -p 5432 -v -d vm_bank_backup_db /opt/backup/vm_bank_bk.sql
+pg_restore: error: input file appears to be a text format dump. Please use psql.
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/psql -U postgres -p 5432 -v -d vm_bank_backup_db /opt/backup/vm_bank_bk.sql
+psql: warning: extra command-line argument "/opt/backup/vm_bank_bk.sql" ignored
+psql (16.7)
+Type "help" for help.
+
+vm_bank_backup_db=# \q
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/psql -U postgres -p 5432 -v -Fp -d vm_bank_backup_db /opt/backup/vm_bank_bk.sql
+psql: warning: extra command-line argument "/opt/backup/vm_bank_bk.sql" ignored
+psql (16.7)
+Type "help" for help.
+
+vm_bank_backup_db=# \q
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/pg_restore -U postgres -p 5432 -v -Fp -d vm_bank_backup_db /opt/backup/vm_bank_bk.sql
+pg_restore: error: unrecognized archive format "p"; please specify "c", "d", or "t"
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/psql -U postgres -p 5432 -v -d vm_bank_backup_db -f /opt/backup/vm_bank_bk.sql
+SET
+SET
+SET
+SET
+SET
+ set_config 
+------------
+ 
+(1 row)
+
+SET
+SET
+SET
+SET
+CREATE SCHEMA
+ALTER SCHEMA
+CREATE SCHEMA
+ALTER SCHEMA
+SET
+SET
+CREATE TABLE
+ALTER TABLE
+CREATE SEQUENCE
+ALTER SEQUENCE
+ALTER SEQUENCE
+CREATE TABLE
+ALTER TABLE
+CREATE SEQUENCE
+ALTER SEQUENCE
+ALTER SEQUENCE
+CREATE TABLE
+ALTER TABLE
+CREATE SEQUENCE
+ALTER SEQUENCE
+ALTER SEQUENCE
+CREATE TABLE
+ALTER TABLE
+CREATE SEQUENCE
+ALTER SEQUENCE
+ALTER SEQUENCE
+CREATE TABLE
+ALTER TABLE
+CREATE SEQUENCE
+ALTER SEQUENCE
+ALTER SEQUENCE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+COPY 5
+COPY 5
+COPY 5
+COPY 5
+COPY 10
+ setval 
+--------
+      5
+(1 row)
+
+ setval 
+--------
+      5
+(1 row)
+
+ setval 
+--------
+      5
+(1 row)
+
+ setval 
+--------
+      5
+(1 row)
+
+ setval 
+--------
+     10
+(1 row)
+
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+GRANT
+GRANT
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/psql -U postgres -p 5432 -v  -d vm_bank_backup_db
+psql (16.7)
+Type "help" for help.
+
+vm_bank_backup_db=# \dt
+            List of relations
+ Schema |     Name     | Type  |  Owner   
+--------+--------------+-------+----------
+ public | accounts     | table | postgres
+ public | customers    | table | postgres
+ public | loans        | table | postgres
+ public | transactions | table | postgres
+(4 rows)
+
+vm_bank_backup_db=# \dn
+        List of schemas
+   Name    |       Owner       
+-----------+-------------------
+ employees | postgres
+ loans     | postgres
+ public    | pg_database_owner
+(3 rows)
+
+vm_bank_backup_db=# \du
+                                    List of roles
+       Role name        |                         Attributes                         
+------------------------+------------------------------------------------------------
+ alice                  | Superuser
+ bob                    | 
+ charlie                | 
+ customers_table_access | Cannot login
+ diana                  | 
+ edward                 | 
+ postgres               | Superuser, Create role, Create DB, Replication, Bypass RLS
+
+vm_bank_backup_db=# CREATE DATABASE vm_bank_tar;
+CREATE DATABASE
+vm_bank_backup_db=# \q
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/pg_restore -U postgres -p 5432 -Ft -v -d vm_bank_tar /opt/backup/vm_bank_tarbk.gzip
+pg_restore: connecting to database for restore
+pg_restore: creating SCHEMA "employees"
+pg_restore: creating SCHEMA "loans"
+pg_restore: creating TABLE "employees.employees"
+pg_restore: creating SEQUENCE "employees.employees_employee_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "employees.employees_employee_id_seq"
+pg_restore: creating TABLE "public.accounts"
+pg_restore: creating SEQUENCE "public.accounts_account_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.accounts_account_id_seq"
+pg_restore: creating TABLE "public.customers"
+pg_restore: creating SEQUENCE "public.customers_customer_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.customers_customer_id_seq"
+pg_restore: creating TABLE "public.loans"
+pg_restore: creating SEQUENCE "public.loans_loan_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.loans_loan_id_seq"
+pg_restore: creating TABLE "public.transactions"
+pg_restore: creating SEQUENCE "public.transactions_transaction_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.transactions_transaction_id_seq"
+pg_restore: creating DEFAULT "employees.employees employee_id"
+pg_restore: creating DEFAULT "public.accounts account_id"
+pg_restore: creating DEFAULT "public.customers customer_id"
+pg_restore: creating DEFAULT "public.loans loan_id"
+pg_restore: creating DEFAULT "public.transactions transaction_id"
+pg_restore: processing data for table "employees.employees"
+pg_restore: processing data for table "public.accounts"
+pg_restore: processing data for table "public.customers"
+pg_restore: processing data for table "public.loans"
+pg_restore: processing data for table "public.transactions"
+pg_restore: executing SEQUENCE SET employees_employee_id_seq
+pg_restore: executing SEQUENCE SET accounts_account_id_seq
+pg_restore: executing SEQUENCE SET customers_customer_id_seq
+pg_restore: executing SEQUENCE SET loans_loan_id_seq
+pg_restore: executing SEQUENCE SET transactions_transaction_id_seq
+pg_restore: creating CONSTRAINT "employees.employees employees_email_key"
+pg_restore: creating CONSTRAINT "employees.employees employees_phone_key"
+pg_restore: creating CONSTRAINT "employees.employees employees_pkey"
+pg_restore: creating CONSTRAINT "public.accounts accounts_pkey"
+pg_restore: creating CONSTRAINT "public.customers customers_email_key"
+pg_restore: creating CONSTRAINT "public.customers customers_phone_key"
+pg_restore: creating CONSTRAINT "public.customers customers_pkey"
+pg_restore: creating CONSTRAINT "public.loans loans_pkey"
+pg_restore: creating CONSTRAINT "public.transactions transactions_pkey"
+pg_restore: creating FK CONSTRAINT "public.accounts accounts_customer_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.loans loans_customer_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.transactions transactions_account_id_fkey"
+pg_restore: creating ACL "public.TABLE accounts"
+pg_restore: creating ACL "public.TABLE customers"
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/psql -U postgres -p 5432 -d vm_bank_tar;
+psql (16.7)
+Type "help" for help.
+
+vm_bank_tar=# \dt
+            List of relations
+ Schema |     Name     | Type  |  Owner   
+--------+--------------+-------+----------
+ public | accounts     | table | postgres
+ public | customers    | table | postgres
+ public | loans        | table | postgres
+ public | transactions | table | postgres
+(4 rows)
+
+vm_bank_tar=# \dn
+        List of schemas
+   Name    |       Owner       
+-----------+-------------------
+ employees | postgres
+ loans     | postgres
+ public    | pg_database_owner
+(3 rows)
+
+vm_bank_tar=# \du
+                                    List of roles
+       Role name        |                         Attributes                         
+------------------------+------------------------------------------------------------
+ alice                  | Superuser
+ bob                    | 
+ charlie                | 
+ customers_table_access | Cannot login
+ diana                  | 
+ edward                 | 
+ postgres               | Superuser, Create role, Create DB, Replication, Bypass RLS
+
+vm_bank_tar=# TRUNCATE TABLE transactions;
+TRUNCATE TABLE
+vm_bank_tar=# select * from transactions;
+ transaction_id | account_id | transaction_type | amount | transaction_date 
+----------------+------------+------------------+--------+------------------
+(0 rows)
+
+vm_bank_tar=# \q
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/pg_restore -U postgres -p 5432 -Ft -t transactions -v -d vm_bank_tar /opt/backup/vm_bank_tarbk.gzip
+pg_restore: connecting to database for restore
+pg_restore: creating TABLE "public.transactions"
+pg_restore: while PROCESSING TOC:
+pg_restore: from TOC entry 222; 1259 16421 TABLE transactions postgres
+pg_restore: error: could not execute query: ERROR:  relation "transactions" already exists
+Command was: CREATE TABLE public.transactions (
+    transaction_id integer NOT NULL,
+    account_id integer,
+    transaction_type character varying(10),
+    amount numeric(15,2),
+    transaction_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT transactions_amount_check CHECK ((amount > (0)::numeric)),
+    CONSTRAINT transactions_transaction_type_check CHECK (((transaction_type)::text = ANY ((ARRAY['deposit'::character varying, 'withdrawal'::character varying, 'transfer'::character varying])::text[])))
+);
+
+
+pg_restore: processing data for table "public.transactions"
+pg_restore: warning: errors ignored on restore: 1
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/psql -U postgres -p 5432 -d vm_bank_tar;
+psql (16.7)
+Type "help" for help.
+
+vm_bank_tar=# SELECT * FROM transactions;
+ transaction_id | account_id | transaction_type | amount  |      transaction_date      
+----------------+------------+------------------+---------+----------------------------
+              1 |          1 | deposit          | 2000.00 | 2025-03-09 07:57:34.823479
+              2 |          1 | withdrawal       |  500.00 | 2025-03-09 07:57:34.823479
+              3 |          2 | deposit          | 1000.50 | 2025-03-09 07:57:34.823479
+              4 |          3 | transfer         | 5000.00 | 2025-03-09 07:57:34.823479
+              5 |          4 | deposit          |  300.00 | 2025-03-09 07:57:34.823479
+              6 |          5 | withdrawal       | 1000.00 | 2025-03-09 07:57:34.823479
+              7 |          2 | transfer         |  750.00 | 2025-03-09 07:57:34.823479
+              8 |          3 | withdrawal       | 2500.00 | 2025-03-09 07:57:34.823479
+              9 |          4 | deposit          | 1500.00 | 2025-03-09 07:57:34.823479
+             10 |          5 | deposit          | 2000.00 | 2025-03-09 07:57:34.823479
+(10 rows)
+
+vm_bank_tar=# 
