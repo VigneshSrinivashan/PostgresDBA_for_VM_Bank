@@ -70,4 +70,4 @@ WHERE relname = 'customer_transactions';
  customer_transactions |          0
 (1 row)
 
-vm_bank=# 
+vm_bank=#
