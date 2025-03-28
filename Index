@@ -1,0 +1,73 @@
+[root@ip-172-31-24-147 ~]# 
+[root@ip-172-31-24-147 ~]# systemctl status postgresql-16
+○ postgresql-16.service - PostgreSQL 16 database server
+     Loaded: loaded (/usr/lib/systemd/system/postgresql-16.service; disabled; preset: disabled)
+     Active: inactive (dead)
+       Docs: https://www.postgresql.org/docs/16/static/
+[root@ip-172-31-24-147 ~]# systemctl start postgresql-16
+[root@ip-172-31-24-147 ~]# su - postgres
+Last login: Wed Mar 26 01:39:38 UTC 2025 on pts/0
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/psql -U postgres -p 5432 -d vm_bank
+psql (16.7)
+Type "help" for help.
+
+vm_bank=# \du
+                                    List of roles
+       Role name        |                         Attributes                         
+------------------------+------------------------------------------------------------
+ alice                  | Superuser
+ bob                    | 
+ charlie                | 
+ customers_table_access | Cannot login
+ diana                  | 
+ edward                 | 
+ postgres               | Superuser, Create role, Create DB, Replication, Bypass RLS
+
+vm_bank=# \dn
+        List of schemas
+   Name    |       Owner       
+-----------+-------------------
+ employees | postgres
+ loans     | postgres
+ public    | pg_database_owner
+(3 rows)
+
+vm_bank=# \dt
+                 List of relations
+ Schema |         Name          | Type  |  Owner   
+--------+-----------------------+-------+----------
+ public | accounts              | table | postgres
+ public | customer_transactions | table | postgres
+ public | customers             | table | postgres
+ public | loans                 | table | postgres
+ public | transactions          | table | postgres
+(5 rows)
+
+vm_bank=# SELECT * FROM loans;
+ loan_id | customer_id | loan_amount | interest_rate | duration_months | status |         created_at         
+---------+-------------+-------------+---------------+-----------------+--------+----------------------------
+       1 |           1 |    50000.00 |          5.50 |              36 | active | 2025-03-09 08:07:56.468153
+       2 |           2 |   200000.00 |          6.25 |              60 | active | 2025-03-09 08:07:56.468153
+       3 |           3 |    75000.00 |          4.75 |              24 | closed | 2025-03-09 08:07:56.468153
+       4 |           4 |   120000.00 |          5.00 |              48 | active | 2025-03-09 08:07:56.468153
+       5 |           5 |   500000.00 |          7.00 |              72 | closed | 2025-03-09 08:07:56.468153
+(5 rows)
+
+vm_bank=#  
+vm_bank=# 
+vm_bank=# EXPLAIN SELECT * FROM loans WHERE interest_rate > 5;
+                       QUERY PLAN                        
+---------------------------------------------------------
+ Seq Scan on loans  (cost=0.00..18.75 rows=233 width=88)
+   Filter: (interest_rate > '5'::numeric)
+(2 rows)
+
+vm_bank=# CREATE INDEX loan_idx on loans (interest_rate);
+CREATE INDEX
+vm_bank=# 
+vm_bank=# EXPLAIN SELECT * FROM loans WHERE interest_rate > 5;
+                      QUERY PLAN                      
+------------------------------------------------------
+ Seq Scan on loans  (cost=0.00..1.06 rows=2 width=88)
+   Filter: (interest_rate > '5'::numeric)
+(2 rows)
