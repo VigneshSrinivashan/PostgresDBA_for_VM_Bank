@@ -1,0 +1,185 @@
+Last login: Sat Apr  5 19:28:07 on console
+vigneshsrinivasan@192 ~ % ssh -i ~/Downloads/m.pem ec2-user@ec2-54-252-223-60.ap-southeast-2.compute.amazonaws.com
+The authenticity of host 'ec2-54-252-223-60.ap-southeast-2.compute.amazonaws.com (54.252.223.60)' can't be established.
+ED25519 key fingerprint is SHA256:zpsQufeVboyx14/wiM3/H6Tzy0+o5jKfLRo6mkluLCs.
+This host key is known by the following other names/addresses:
+    ~/.ssh/known_hosts:29: ec2-3-26-217-30.ap-southeast-2.compute.amazonaws.com
+    ~/.ssh/known_hosts:32: ec2-13-211-69-4.ap-southeast-2.compute.amazonaws.com
+    ~/.ssh/known_hosts:33: ec2-3-26-23-245.ap-southeast-2.compute.amazonaws.com
+    ~/.ssh/known_hosts:34: ec2-3-27-95-38.ap-southeast-2.compute.amazonaws.com
+    ~/.ssh/known_hosts:35: ec2-3-27-76-184.ap-southeast-2.compute.amazonaws.com
+    ~/.ssh/known_hosts:37: ec2-3-26-3-126.ap-southeast-2.compute.amazonaws.com
+    ~/.ssh/known_hosts:38: ec2-3-26-9-246.ap-southeast-2.compute.amazonaws.com
+    ~/.ssh/known_hosts:39: ec2-3-27-8-176.ap-southeast-2.compute.amazonaws.com
+    (4 additional names omitted)
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-54-252-223-60.ap-southeast-2.compute.amazonaws.com' (ED25519) to the list of known hosts.
+Register this system with Red Hat Insights: rhc connect
+
+Example:
+# rhc connect --activation-key <key> --organization <org>
+
+The rhc client and Red Hat Insights will enable analytics and additional
+management capabilities on your system.
+View your connected systems at https://console.redhat.com/insights
+
+You can learn more about how to register your system 
+using rhc at https://red.ht/registration
+Last login: Sat Apr  5 08:17:45 2025 from 223.185.23.69
+[ec2-user@ip-172-31-24-147 ~]$ sudo su -
+Last login: Sat Apr  5 08:17:53 UTC 2025 on pts/1
+[root@ip-172-31-24-147 ~]# systemctl status postgresql-16
+○ postgresql-16.service - PostgreSQL 16 database server
+     Loaded: loaded (/usr/lib/systemd/system/postgresql-16.service; disabled; preset: disabled)
+     Active: inactive (dead)
+       Docs: https://www.postgresql.org/docs/16/static/
+[root@ip-172-31-24-147 ~]# systemctl start postgresql-16
+[root@ip-172-31-24-147 ~]# systemctl status postgresql-16
+● postgresql-16.service - PostgreSQL 16 database server
+     Loaded: loaded (/usr/lib/systemd/system/postgresql-16.service; disabled; preset: disabled)
+     Active: active (running) since Sat 2025-04-05 16:07:16 UTC; 3s ago
+       Docs: https://www.postgresql.org/docs/16/static/
+    Process: 1564 ExecStartPre=/usr/pgsql-16/bin/postgresql-16-check-db-dir ${PGDATA} (code=exited, status=0/SUCCESS)
+   Main PID: 1569 (postgres)
+      Tasks: 7 (limit: 4377)
+     Memory: 38.5M
+        CPU: 39ms
+     CGroup: /system.slice/postgresql-16.service
+             ├─1569 /usr/pgsql-16/bin/postgres -D /var/lib/pgsql/16/data/
+             ├─1570 "postgres: logger "
+             ├─1571 "postgres: checkpointer "
+             ├─1572 "postgres: background writer "
+             ├─1574 "postgres: walwriter "
+             ├─1575 "postgres: autovacuum launcher "
+             └─1576 "postgres: logical replication launcher "
+
+Apr 05 16:07:16 ip-172-31-24-147.ap-southeast-2.compute.internal systemd[1]: Starting PostgreSQL 16 database server...
+Apr 05 16:07:16 ip-172-31-24-147.ap-southeast-2.compute.internal postgres[1569]: 2025-04-05 16:07:16.688 GMT [1569] LOG:  redirecting log output to logging collector process
+Apr 05 16:07:16 ip-172-31-24-147.ap-southeast-2.compute.internal postgres[1569]: 2025-04-05 16:07:16.688 GMT [1569] HINT:  Future log output will appear in directory "log".
+Apr 05 16:07:16 ip-172-31-24-147.ap-southeast-2.compute.internal systemd[1]: Started PostgreSQL 16 database server.
+[root@ip-172-31-24-147 ~]# su - postgres
+Last login: Sat Apr  5 08:18:05 UTC 2025 on pts/1
+[postgres@ip-172-31-24-147 ~]$ 
+[postgres@ip-172-31-24-147 ~]$ 
+[postgres@ip-172-31-24-147 ~]$ logout
+[root@ip-172-31-24-147 ~]# 
+[root@ip-172-31-24-147 ~]# 
+[root@ip-172-31-24-147 ~]# su - postgres
+Last login: Sat Apr  5 16:07:40 UTC 2025 on pts/0
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/psql -U postgres -h 5432 -d vm_bank
+
+^C
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/psql -U postgres -p 5432 -d vm_bank
+psql (16.7)
+Type "help" for help.
+
+vm_bank=# \db
+       List of tablespaces
+    Name    |  Owner   | Location 
+------------+----------+----------
+ pg_default | postgres | 
+ pg_global  | postgres | 
+(2 rows)
+
+vm_bank=# \q
+[postgres@ip-172-31-24-147 ~]$ logout
+[root@ip-172-31-24-147 ~]# 
+[root@ip-172-31-24-147 ~]# 
+[root@ip-172-31-24-147 ~]# mkdir /opt/temp_tablespace
+[root@ip-172-31-24-147 ~]# chmod 700 /opt/temp_tablespace/
+[root@ip-172-31-24-147 ~]# chown postgres: /opt/temp_tablespace/
+[root@ip-172-31-24-147 ~]# 
+[root@ip-172-31-24-147 ~]# su - postgres
+Last login: Sat Apr  5 16:15:00 UTC 2025 on pts/0
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/psql -U postgres -p 5432 -d vm_bank
+psql (16.7)
+Type "help" for help.
+
+vm_bank=# CREATE TABLESPACE temp_tablespc LOCATION '/opt/temp_tablespace/';
+CREATE TABLESPACE
+vm_bank=# \q
+[postgres@ip-172-31-24-147 ~]$ logout
+[root@ip-172-31-24-147 ~]# pwd
+/root
+[root@ip-172-31-24-147 ~]# ls /var/lib/pgsql/16/data/
+base              global  pg_commit_ts  pg_hba.conf    pg_logical    pg_notify    pg_serial     pg_stat      pg_subtrans  pg_twophase  pg_wal   postgresql.auto.conf  postmaster.opts
+current_logfiles  log     pg_dynshmem   pg_ident.conf  pg_multixact  pg_replslot  pg_snapshots  pg_stat_tmp  pg_tblspc    PG_VERSION   pg_xact  postgresql.conf       postmaster.pid
+[root@ip-172-31-24-147 ~]# ls -l /var/lib/pgsql/16/data/pg_tblspc/
+total 0
+lrwxrwxrwx. 1 postgres postgres 20 Apr  5 16:22 16769 -> /opt/temp_tablespace
+[root@ip-172-31-24-147 ~]# 
+[root@ip-172-31-24-147 ~]# su - postgres
+Last login: Sat Apr  5 16:20:09 UTC 2025 on pts/0
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/psql -U postgres -p 5432 -d vm_bank
+psql (16.7)
+Type "help" for help.
+
+vm_bank=# \db
+               List of tablespaces
+     Name      |  Owner   |       Location       
+---------------+----------+----------------------
+ pg_default    | postgres | 
+ pg_global     | postgres | 
+ temp_tablespc | postgres | /opt/temp_tablespace
+(3 rows)
+
+vm_bank=# CREATE TABLE customers_new (
+  LIKE customers INCLUDING ALL
+) TABLESPACE temp_tablespc;
+CREATE TABLE
+vm_bank=# SELECT * FROM customers;
+ customer_id | first_name | last_name |           email           |   phone    |             address             |         created_at         
+-------------+------------+-----------+---------------------------+------------+---------------------------------+----------------------------
+           1 | John       | Doe       | john.doe@email.com        | 9876543210 | 123 Main St, New York, NY       | 2025-03-09 07:50:29.763121
+           2 | Jane       | Smith     | jane.smith@email.com      | 9123456789 | 456 Elm St, Los Angeles, CA     | 2025-03-09 07:50:29.763121
+           3 | Robert     | Brown     | robert.brown@email.com    | 9234567890 | 789 Oak St, Chicago, IL         | 2025-03-09 07:50:29.763121
+           4 | Emily      | Davis     | emily.davis@email.com     | 9345678901 | 321 Pine St, Houston, TX        | 2025-03-09 07:50:29.763121
+           5 | Michael    | Johnson   | michael.johnson@email.com | 9456789012 | 654 Maple St, San Francisco, CA | 2025-03-09 07:50:29.763121
+(5 rows)
+
+vm_bank=# SELECT * FROM customers_new;
+ customer_id | first_name | last_name | email | phone | address | created_at 
+-------------+------------+-----------+-------+-------+---------+------------
+(0 rows)
+
+vm_bank=# 
+vm_bank=# SELECT tablename, tablespace
+FROM pg_tables
+WHERE tablename = 'customers_new';
+   tablename   |  tablespace   
+---------------+---------------
+ customers_new | temp_tablespc
+(1 row)
+
+vm_bank=# SELECT * FROM customers_new;
+ customer_id | first_name | last_name |           email           |   phone    |             address             |         created_at         
+-------------+------------+-----------+---------------------------+------------+---------------------------------+----------------------------
+           1 | John       | Doe       | john.doe@email.com        | 9876543210 | 123 Main St, New York, NY       | 2025-03-09 07:50:29.763121
+           2 | Jane       | Smith     | jane.smith@email.com      | 9123456789 | 456 Elm St, Los Angeles, CA     | 2025-03-09 07:50:29.763121
+           3 | Robert     | Brown     | robert.brown@email.com    | 9234567890 | 789 Oak St, Chicago, IL         | 2025-03-09 07:50:29.763121
+           4 | Emily      | Davis     | emily.davis@email.com     | 9345678901 | 321 Pine St, Houston, TX        | 2025-03-09 07:50:29.763121
+           5 | Michael    | Johnson   | michael.johnson@email.com | 9456789012 | 654 Maple St, San Francisco, CA | 2025-03-09 07:50:29.763121
+(5 rows)
+
+vm_bank=# DROP TABLE customers_new;
+DROP TABLE
+vm_bank=# \db
+               List of tablespaces
+     Name      |  Owner   |       Location       
+---------------+----------+----------------------
+ pg_default    | postgres | 
+ pg_global     | postgres | 
+ temp_tablespc | postgres | /opt/temp_tablespace
+(3 rows)
+
+vm_bank=# DROP TABLESPACE temp_tablespc;
+DROP TABLESPACE
+vm_bank=# \db
+       List of tablespaces
+    Name    |  Owner   | Location 
+------------+----------+----------
+ pg_default | postgres | 
+ pg_global  | postgres | 
+(2 rows)
+
+vm_bank=# 
