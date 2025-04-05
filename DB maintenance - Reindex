@@ -1,0 +1,75 @@
+vigneshsrinivasan@192 ~ % ssh -i ~/Downloads/m.pem ec2-user@ec2-3-107-242-245.ap-southeast-2.compute.amazonaws.com
+Register this system with Red Hat Insights: rhc connect
+
+Example:
+# rhc connect --activation-key <key> --organization <org>
+
+The rhc client and Red Hat Insights will enable analytics and additional
+management capabilities on your system.
+View your connected systems at https://console.redhat.com/insights
+
+You can learn more about how to register your system 
+using rhc at https://red.ht/registration
+Last login: Sat Apr  5 06:47:45 2025 from 223.185.23.69
+[ec2-user@ip-172-31-24-147 ~]$ sudo su -
+Last login: Sat Apr  5 06:47:51 UTC 2025 on pts/0
+[root@ip-172-31-24-147 ~]# systemctl status postgresql-16
+● postgresql-16.service - PostgreSQL 16 database server
+     Loaded: loaded (/usr/lib/systemd/system/postgresql-16.service; disabled; preset: disabled)
+     Active: active (running) since Sat 2025-04-05 06:48:25 UTC; 1h 29min ago
+       Docs: https://www.postgresql.org/docs/16/static/
+    Process: 1587 ExecStartPre=/usr/pgsql-16/bin/postgresql-16-check-db-dir ${PGDATA} (code=exited, status=0/SUCCESS)
+   Main PID: 1592 (postgres)
+      Tasks: 8 (limit: 4377)
+     Memory: 54.2M
+        CPU: 2.039s
+     CGroup: /system.slice/postgresql-16.service
+             ├─1592 /usr/pgsql-16/bin/postgres -D /var/lib/pgsql/16/data/
+             ├─1593 "postgres: logger "
+             ├─1594 "postgres: checkpointer "
+             ├─1595 "postgres: background writer "
+             ├─1597 "postgres: walwriter "
+             ├─1598 "postgres: autovacuum launcher "
+             ├─1599 "postgres: logical replication launcher "
+             └─1674 "postgres: postgres vm_bank [local] idle"
+
+Apr 05 06:48:25 ip-172-31-24-147.ap-southeast-2.compute.internal systemd[1]: Starting PostgreSQL 16 database server...
+Apr 05 06:48:25 ip-172-31-24-147.ap-southeast-2.compute.internal postgres[1592]: 2025-04-05 06:48:25.832 GMT [1592] LOG:  redirecting log output to logging collector process
+Apr 05 06:48:25 ip-172-31-24-147.ap-southeast-2.compute.internal postgres[1592]: 2025-04-05 06:48:25.832 GMT [1592] HINT:  Future log output will appear in directory "log".
+Apr 05 06:48:25 ip-172-31-24-147.ap-southeast-2.compute.internal systemd[1]: Started PostgreSQL 16 database server.
+[root@ip-172-31-24-147 ~]# su - postgres
+Last login: Sat Apr  5 06:48:39 UTC 2025 on pts/0
+[postgres@ip-172-31-24-147 ~]$ /usr/pgsql-16/bin/psql -U postgres -p 5432 -d vm_bank
+psql (16.7)
+Type "help" for help.
+
+vm_bank=# SELECT COUNT(*) FROM transactions;
+ count 
+-------
+  1210
+(1 row)
+
+vm_bank=# CREATE INDEX amount_idx ON transactions(amount);
+CREATE INDEX
+vm_bank=# select pg_size_pretty(pg_relation_size('amount_idx'));
+ pg_size_pretty 
+----------------
+ 48 kB
+(1 row)
+
+vm_bank=# DELETE FROM transactions WHERE amount > 2000;
+DELETE 976
+vm_bank=# 
+vm_bank=# ANALYZE transactions;
+ANALYZE
+vm_bank=# REINDEX (VERBOSE) INDEX  amount_idx;
+INFO:  index "amount_idx" was reindexed
+DETAIL:  CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+REINDEX
+vm_bank=# select pg_size_pretty(pg_relation_size('amount_idx'));
+ pg_size_pretty 
+----------------
+ 16 kB
+(1 row)
+
+vm_bank=# 
